@@ -16,21 +16,44 @@ Stretch: What if you could only use instances of your Stack class to implement t
 # Array version:
 
 
+# class Queue:
+#     def __init__(self):
+#         # self.size = 0
+#         self.storage = []
+
+#     def __len__(self):
+#         return(len((self.storage)))
+
+#     def enqueue(self, value):
+#         self.storage.append(value)
+#         return self.storage
+
+#     def dequeue(self):
+#         if len(self.storage) == 0:
+#             return None
+#         else:
+#             rm_data = self.storage.pop(0)
+#             return rm_data
+
+# Liked List:
+from singly_linked_list import LinkedList
+
+
 class Queue:
     def __init__(self):
-        # self.size = 0
-        self.storage = []
+        self.storage = LinkedList()
+        self.size = self.storage.getCount()
 
     def __len__(self):
-        return(len((self.storage)))
+        return(self.storage.getCount())
 
     def enqueue(self, value):
-        self.storage.append(value)
+        self.storage.add_to_tail(value)
         return self.storage
 
     def dequeue(self):
-        if len(self.storage) == 0:
+        if self.storage.getCount() == 0:
             return None
         else:
-            rm_data = self.storage.pop(0)
+            rm_data = self.storage.remove_head()
             return rm_data
