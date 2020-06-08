@@ -8,7 +8,7 @@ class Node:
         return self.value
 
     def get_next(self):
-           # returns the thing pointed at by this node's `next` reference
+        # returns the thing pointed at by this node's `next` reference
         return self.next_node
 
     def set_next(self, new_next):
@@ -104,7 +104,7 @@ class LinkedList:
             # update `self.head` to refer to the Node after the Node we just deleted
             self.head = self.head.get_next()
 
-    return data
+        return data
 
     '''
     Traverses the linked list and returns a boolean indicating whether the
@@ -114,46 +114,43 @@ class LinkedList:
     '''
 
     def contains(self, data):
-    # an empty linked list can't contain what we're looking for
+        # an empty linked list can't contain what we're looking for
         if not self.head:
             return False
 
         # get a reference to the first Node in the linked list
         # we update what this Node points to as we traverse the linked list
-    current = self.head
+        current = self.head
 
-    # traverse the linked list so long as `current` is referring
-    # to a Node
-   while current is not None:
-           # check if the Node that `current` is pointing at is holding
+        # traverse the linked list so long as `current` is referring
+        # to a Node
+        while current is not None:
+            # check if the Node that `current` is pointing at is holding
             # the data we're looking for
-        if current.get_value() == data:
-            return True
-        # update our `current` pointer to point to the next Node in the linked list
-        current = current.get_next()
+            if current.get_value() == data:
+                return True
+            # update our `current` pointer to point to the next Node in the linked list
+            current = current.get_next()
 
-    # we checked the whole linked list and didn't find the data
-    return False
-​
-   '''
-    Traverses the linked list, fetching the max value in the linked list
-​
-    What is the runtime of this method?
+        # we checked the whole linked list and didn't find the data
+        return False
+
     '''
+     Traverses the linked list, fetching the max value in the linked list
+ ​
+     What is the runtime of this method?
+     '''
 
     def get_max(self):
         if self.head is None:
             return None
-​
-   max_so_far = self.head.get_value()
-​
-   current = self.head.get_next()
-​
-   while current is not None:
-        if current.get_value() > max_so_far:
-            max_so_far = current.get_value()
-​
-   current = current.get_next()
-​
-   return max_so_far
 
+        max_so_far = self.head.get_value()
+        current = self.head.get_next()
+
+        while current is not None:
+            if current.get_value() > max_so_far:
+                max_so_far = current.get_value()
+
+            current = current.get_next()
+        return max_so_far
