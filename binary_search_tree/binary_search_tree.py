@@ -9,6 +9,8 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -17,10 +19,31 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        # 1. if no root
+        # if self is none
+        if self is None:
+            # if isn't, create the node and park it there
+            self = BSTNode(value)
+        # 2. there is a root
+        else:
+            # comparer the value
+            if value < self.value:
+                # go left
+                # if another node on this side
+                if self.left:
+                    self.left.insert(value)
+                else:
+                    self.left = BSTNode(value)
 
-    # Return True if the tree contains the value
-    # False if it does not
+            else:
+                # else go right
+                # Return True if the tree contains the value
+                # False if it does not
+                if self.right:
+                    self.right.insert(value)
+                else:
+                    self.right = BSTNode(value)
+
     def contains(self, target):
         pass
 
