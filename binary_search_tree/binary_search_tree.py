@@ -75,9 +75,12 @@ class BSTNode:
             return None
 
         max_so_far = self.value
+        # if left side or right side no elements, return max_so_far
+        if self.right is None or self.left is None:
+            return max_so_far
+
         left_max = self.left.get_max()
         right_max = self.right.get_max()
-
         # if left value greater than max_so_far, update max_so_far
         if max_so_far < left_max:
             max_so_far = left_max
@@ -92,9 +95,8 @@ class BSTNode:
     def for_each(self, fn):
         # if empty return none
         if self is None:
-            return None
+            return
         self.left.for_each(fn)
-        fn(self.value)
         self.right.for_each(fn)
 
     # Part 2 -----------------------
