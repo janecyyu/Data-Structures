@@ -1,7 +1,7 @@
 """
-Binary search trees are a data structure that enforce an ordering over 
-the data they store. That ordering in turn makes it a lot more efficient 
-at searching for a particular piece of data in the tree. 
+Binary search trees are a data structure that enforce an ordering over
+the data they store. That ordering in turn makes it a lot more efficient
+at searching for a particular piece of data in the tree.
 
 This part of the project comprises two days:
 1. Implement the methods `insert`, `contains`, `get_max`, and `for_each`
@@ -70,34 +70,37 @@ class BSTNode:
 
     def get_max(self):
 
-        # if no root, return none:
+        # if no self, return none:
         if self is None:
             return None
 
-        max_so_far = self.value
-        # if left side or right side no elements, return max_so_far
-        if self.right is None or self.left is None:
-            return max_so_far
+        # only one element
+        if self.left is None and self.right is None:
+            return self.value
 
-        left_max = self.left.get_max()
-        right_max = self.right.get_max()
-        # if left value greater than max_so_far, update max_so_far
-        if max_so_far < left_max:
-            max_so_far = left_max
+        res = self.value
+        # set left nad right max are zero at the begining, in case left or right side is empty
+        left_max = 0
+        right_max = 0
 
-        # if right value greater than max_so_far, update max_so_far
-        if max_so_far < right_max:
-            max_so_far = right_max
+        if self.left:
+            left_max = self.left.get_max()
+        if self.right:
+            right_max = self.right.get_max()
 
-        return max_so_far
+        if (left_max > res):
+            res = left_max
+        if (right_max > res):
+            res = right_max
+        return res
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        # if empty return none
-        if self is None:
-            return
-        self.left.for_each(fn)
-        self.right.for_each(fn)
+        fn(self.value)
+        if self.left:
+            self.left.for_each(fn)
+        if self.right:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
