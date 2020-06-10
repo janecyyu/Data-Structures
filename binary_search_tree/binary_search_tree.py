@@ -46,7 +46,7 @@ class BSTNode:
     def contains(self, target):
         # if no root, return none
         if self is None:
-            return None
+            return False
         # if root equals target, return true
         elif self.value == target:
             return True
@@ -55,15 +55,15 @@ class BSTNode:
             if target > self.value:
                 if self.right:
                     # repeat again the previous steps
-                    self.right.contains(target)
+                    return self.right.contains(target)
                 # if no more elements means not found
                 else:
                     return False
             # if target less than self's value, go left
-            if target < self.value:
+            else:
                 if self.left:
                     # repeat again the previous steps
-                    self.left.contains(target)
+                    return self.left.contains(target)
                 # if no more elements means not found
                 else:
                     return False
