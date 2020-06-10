@@ -154,10 +154,41 @@ List and inserts it as the new head node of the List."""
     the node was the head or the tail"""
 
     def delete(self, node):
-        node.delete()
-        self.length -= 1
+        if not self.head:
+            return None
+
+        current = self.head
+
+        # traverse the linked list so long as `current` is referring
+        # to a Node
+        while current is not None:
+            # check if the Node that `current` is pointing at is holding
+            # the data we're looking for
+            if current.value == node.value:
+                # if removing head, should move head to next
+                if current == self.head:
+                    self.head = self.head.next
+                current.delete()
+                self.length -= 1
+                # if it'd empty after removing, set head and tail to none
+                if self.length == 0:
+                    self.head = None
+                    self.tail = None
+            # update our `current` pointer to point to the next Node in the linked list
+            current = current.next
 
     """Returns the highest value currently in the list"""
 
     def get_max(self):
-        pass
+        if self.head is None:
+            return None
+
+        max_so_far = self.head.value
+        current = self.head.next
+
+        while current is not None:
+            if current.value > max_so_far:
+                max_so_far = current.value
+
+            current = current.next
+        return max_so_far
