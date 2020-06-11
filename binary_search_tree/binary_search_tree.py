@@ -9,6 +9,7 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+from collections import deque
 
 
 class BSTNode:
@@ -44,7 +45,6 @@ class BSTNode:
                     self.right = BSTNode(value)
 
     def contains(self, target):
-
         # if root equals target, return true
         if self.value == target:
             return True
@@ -105,27 +105,68 @@ class BSTNode:
             self.right.for_each(fn)
 
     # Part 2 -----------------------
+    def depth_first_for_each(self, fn):
+        fn(self.value)
+        if self.left:
+            self.left.depth_first_for_each(fn)
+        if self.right:
+            self.right.depth_first_for_each(fn)
+
+    def iter_depth_first_search(self, fn):
+        stack = []
+        stack.append(self)
+        while len(stack) > 0:
+            # pop off the stack
+            current_node = stack.pop()
+            if current_node.right:
+                stack.append(current_node.right)
+            if current_node.left:
+                stack.append(current_node.left)
+            fn(current_node.value)
+
+    def iter_breadth_first_search(self, fn):
+        q = deque()
+        q.append(self)
+
+        while len(q) > 0:
+            current_node = q.popleft()
+            if current_node.left:
+                q.append(current_node.left)
+            if current_node.right:
+                q.append(current_node.right)
+            fn(current_node.value)
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-
     def in_order_print(self, node):
-        pass
+        if node is None:
+            return
+
+        self.in_order_print(node.left)
+        print(node.value)
+        self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        if node is None:
+            return
+        # print(self.value)
+        self.iter_breadth_first_search(print)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        if node is None:
+            return
+        # print(self.value)
+        self.iter_depth_first_search(print)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
+
     def pre_order_dft(self, node):
         pass
 
