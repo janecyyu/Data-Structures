@@ -44,11 +44,9 @@ class BSTNode:
                     self.right = BSTNode(value)
 
     def contains(self, target):
-        # if no root, return none
-        if self is None:
-            return False
+
         # if root equals target, return true
-        elif self.value == target:
+        if self.value == target:
             return True
         else:
             # if target greater than self's value, go right
@@ -70,29 +68,33 @@ class BSTNode:
 
     def get_max(self):
 
-        # if no self, return none:
-        if self is None:
-            return None
-
-        # only one element
-        if self.left is None and self.right is None:
+        if not self.right:
             return self.value
+        return self.right.get_max()
 
-        res = self.value
-        # set left nad right max are zero at the begining, in case left or right side is empty
-        left_max = 0
-        right_max = 0
+        # # if no self, return none:
+        # if self is None:
+        #     return None
 
-        if self.left:
-            left_max = self.left.get_max()
-        if self.right:
-            right_max = self.right.get_max()
+        # # only one element
+        # if self.left is None and self.right is None:
+        #     return self.value
 
-        if (left_max > res):
-            res = left_max
-        if (right_max > res):
-            res = right_max
-        return res
+        # res = self.value
+        # # set left nad right max are zero at the begining, in case left or right side is empty
+        # left_max = 0
+        # right_max = 0
+
+        # if self.left:
+        #     left_max = self.left.get_max()
+        # if self.right:
+        #     right_max = self.right.get_max()
+
+        # if (left_max > res):
+        #     res = left_max
+        # if (right_max > res):
+        #     res = right_max
+        # return res
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
