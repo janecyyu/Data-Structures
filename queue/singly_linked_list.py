@@ -22,13 +22,17 @@ class LinkedList:
         self.head = None
         # the last Node in the LinkedList
         self.tail = None
+        self.size = 0
 
+    def getCount(self):
+        return self.size
     '''
     Adds `data` to the end of the LinkedList
     O(1) because this operation doesn't depend on the size of the linked list
     '''
 
     def add_to_tail(self, data):
+        self.size += 1
         # wrap the `data` in a Node instance
         new_node = Node(data)
 
@@ -53,6 +57,7 @@ class LinkedList:
     '''
 
     def remove_tail(self):
+        self.size -= 1
         if self.tail is None:
             return None
         # save the tail Node's data
@@ -88,6 +93,7 @@ class LinkedList:
     '''
 
     def remove_head(self):
+        self.size -= 1
         if self.head is None:
             return None
         # save the head Node's data
